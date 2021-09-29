@@ -305,6 +305,145 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `MyCRM` and the **Actor** is the `user`, unless specified otherwise)
 
+**Use case: UC05 - Adding a contact**
+
+**MSS**
+
+1. User requests to add a contact with specific info of name, contact number, address, and email.
+2. MyCRM stores the new contact in the contact list.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given contact name is empty.
+  
+  * 1a1. MyCRM shows an error message.  
+
+    Use case resumes at step 1.
+
+* 1b. Either the given contact number, address or email is empty.
+  
+  * 1b1. MyCRM shows an error message.  
+
+    Use case resumes at step 1.
+  
+* 1c. The given contact name already exists.
+  
+  * 1c1. MyCRM shows an error message.  
+
+    Use case resumes at step 1.
+  
+**Use case: UC06 - Editing a contact**
+
+**MSS**
+
+1. User requests to edit a contact.
+2. MyCRM shows a list of contacts.
+3. User requests to edit a specific contact's info with specific index and type of the field in contact.
+4. MyCRM updates this specifc contact's info.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. MyCRM shows an error message.
+
+      Use case resumes at step 2.
+      
+* 3b. The given edit field type is invaild.
+
+    * 3b1. MyCRM shows an error message.
+
+      Use case resumes at step 2.
+      
+**Use case: UC07 - Deleting a contact**
+
+**MSS**
+
+1. User requests to delete a contact.
+2. MyCRM shows a list of contacts.
+3. User requests to delete a specific contact
+4. MyCRM deletes the contact.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. MyCRM shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: UC08 - Linking a contact to a job**
+
+**MSS**
+
+1. User requests to link a contact to a job.
+2. MyCRM shows a list of contacts.
+3. User requests to use a specifc contact to link a job.
+4. MyCRM shows a list of jobs.
+5. User requests to link to a specific job in the list.
+6. MyCRM links the contact to this job.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. MyCRM shows an error message.
+
+      Use case resumes at step 2.
+      
+* 4a. The list is empty.
+
+  Use case ends.
+
+* 5a. The given index is invalid.
+
+    * 5a1. MyCRM shows an error message.
+
+      Use case resumes at step 4
+
+**Use case: UC09 - Hiding a contact**
+
+**MSS**
+
+1. User requests to hide a contact.
+2. MyCRM shows a list of contacts.
+3. User requests to hide a specific contact in the list.
+4. MyCRM tags the contact as hidden.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. MyCRM shows an error message.
+
+      Use case resumes at step 2.
+
 **Use case: UC10 - Sending an email**
 
 **MSS**
@@ -447,30 +586,115 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
+**Use case: UC18 - Add Product**
+
+**MSS**
+
+1. User requests to add a new product.
+2. MyCRM creates a new product and shows a message with info of the product.
+
+    Use case ends.
+   
+**Extensions** 
+
+* 2a. The product name already exists.
+    * MyCRM shows an error message.
+    
+    Use case ends.
+  
+
+* 2b. The product name is empty.
+    * MyCRM shows an error message.
+    
+    Use case ends.
+
+**Use case: UC19 - List Products**
+
+**MSS**
+
+1. User requests to list products.
+2. MyCRM shows a list of products.
+
+   Use case ends.
+
+**Extensions**
+* 2a. The list of products is empty.
+
+  Use case ends.
+
+**Use case: UC20: Delete a product**
+
+**MSS**
+
+1. User <u>requests to list products (UC19)</u>.
+2. User requests to delete a specific product in the list.
+3. MyCRM deletes the product.
+    
+    Use case ends.
+
+**Extensions**
+
+
+* 2a. The given index is invalid.
+    * 2a1. MyCRM shows an error message.
+    
+    Use case resumes at <u>step 2 in UC19</u>.
+
+**Use case: UC 21: Edit a product.**
+
+**MSS**
+
+1. User <u>requests to list products (UC19)</u>.
+2. User requests to edit a specific product in the list.
+3. MyCRM edits the product and shows a message with edited information of the product.
+
+   Use case ends.
+
+**Extensions**
+* 2a. The given index is invalid.
+    * 2a1. MyCRM shows an error message.
+
+  Use case resumes at <u>step 2 in UC19</u>.
+
+
+* 2b. User requests to edit the name of the product.
+    * 2b1. The product name already exists
+    * 2b2. MyCRM shows an error message.
+
+  Use case resumes at <u>step 2 in UC19</u>.
+
+
+* 2c. User requests to edit the name of the product.
+    * 2c1. The product name is unique.
+    
+    Use case resumes at step 3.
+    
+
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
-   should be able to accomplish most of the tasks faster using commands than using the mouse. 
-4. Should be designed for a single-user.
-5. Should work without an internet connection.
-6. The app should be accessible via the downloaded JAR file without any other installations needed.
-7. Should be quick and responsive.
-8. Should be able to maintain over 100 entries.
-9. Should not take up much computer storage. 
-10. Should work on both 32-bit and 64-bit environments.
+2. Should be able to hold up to 100 _entries_ without a noticeable sluggishness in performance for typical usage.
+3. Should be designed for a single-user.
+4. Should work without an internet connection.
+5. Should be accessible via the downloaded JAR file without any other installations needed.
+6. Should take up less than 50MB computer storage.
+    <!--- This is an arbitrary number. Can be updated later. --> 
+7. Should work on both 32-bit and 64-bit environments.
+8. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
+   should be able to accomplish most of the tasks faster using commands than using the mouse.
 
-*{More to be added}*
+<!--- More to be added -->
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X.
 * **Private contact detail**: A contact detail that is not meant to be shared with others.
 * **Repair Job**: A customer request to restore machinery, equipment, or other products to working order.
+* **Job Status**: A progress bar showing the customer's job's degree of completion.
 * **JSON**: Javascript Standard Object Notation, which is a form of syntax used for storing data.
 * **mailto**: A Uniform Resource Identifier scheme for email addresses, produces hyperlinks on websites that allow
   users to send an email.
+* **Entry**: Contact/job/product.
 
 --------------------------------------------------------------------------------------------------------------------
 
