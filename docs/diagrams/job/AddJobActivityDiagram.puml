@@ -1,0 +1,25 @@
+@startuml
+start
+:User executes add job command;
+:MyCRM parses user inputs;
+if () then ([Valid inputs])
+    if () then ([Contact was provided])
+    else ([No contact provided])
+        :MyCRM asks user to provide contact;
+        :User selects an existing contact or executes add contact command;
+    endif
+    if () then ([Product was provided])
+    else ([No product provided])
+            :MyCRM asks user to provide product;
+            :User selects an existing product or executes add product command;
+    endif
+    :Creates new job;
+    :Stores job into MyCRM;
+    :Displays successful add job on UI;
+else ([Invalid inputs])
+    :Throws ParseException;
+    :Displays unsuccessful add job on UI;
+endif
+stop
+
+@enduml
